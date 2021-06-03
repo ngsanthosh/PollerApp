@@ -1,5 +1,7 @@
+from main.models import Question
 from django.urls import path
 from main import views
 urlpatterns = [
-    # path('', views.Index.as_view(), name="index")
+    path('', views.Index.as_view(), name="index"),
+    path('questions/<slug>', views.Question.as_view(), name="question")
 ]

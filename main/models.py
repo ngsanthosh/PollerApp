@@ -2,6 +2,7 @@ from django.db import models
 
 # Create your models here.
 class Question(models.Model):
+    slug=models.SlugField()
     content=models.CharField(max_length=256)
 
     def __str__(self):
