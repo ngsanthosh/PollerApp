@@ -12,19 +12,28 @@
         <div class="row">
             <div class="col-6">
                 <div class="collection">
-                    
                     {% for choice in question.choice_set.all %}
-                    <div class="collection-item">
-                        <label>
-                            <input class="with-gap" name="choice" type="radio" value="{{choice.id}}"  />
-                            <span>{{choice.content}}</span>
-                        </label>
+                        <div class="collection-item">
+                        {% if answer %}
+                             <span>{{choice.content}}({{choice.answer_count}})</span> 
+                            {% if answer.choices.id == choice.id %}
+                             <i class="tiny material-icons">check_circle</i> 
+                            {% endif %}
+                            
+                            {% else %}
+                            <label>
+                              <input class="with-gap" name="choice" type="radio" value="{{choice.id}}"  />
+                              <span>{{choice.content}}</span>
+                            </label>
+                        {% endif %}
                     </div>
                     {% endfor %}        
                 </div>
                 <div class="row">
+                    {% if not answer %}
                     <button class="btn waves-effect waves-light" type="submit" name="action">Submit 
-                        </button>
+                    </button>
+                    {% endif %}
                 </div>
             </div>
         </div>

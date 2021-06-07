@@ -14,6 +14,14 @@ class Question(SingleObjectMixin, FormView):
     model=models.Question
     template_name="question.html"
     form_class=forms.AnswerForm
+
+    def get_context_data(self,  **kwargs):
+        data=super().get_context_data(**kwargs)
+        data['answer']=models.Answer.objects.get(
+            question=self.get_object(),
+            user=self.request.user
+        )
+        return data
     
 
     def form_valid(self, form):
